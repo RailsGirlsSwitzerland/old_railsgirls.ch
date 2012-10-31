@@ -24,6 +24,8 @@ set :rvm_install_type, :stable
 task :update_config_links, :roles => [:app] do
   run "ln -sf #{shared_path}/config/* #{release_path}/config/"
   run "ln -sf #{shared_path}/bundle #{release_path}/vendor/"
+
+  run "ln -s #{shared_path}/uploads #{release_path}/uploads/"
 end
 before 'deploy:assets:precompile', :update_config_links
 
