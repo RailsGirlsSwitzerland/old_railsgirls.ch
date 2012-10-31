@@ -1,0 +1,57 @@
+!!!
+%html{:lang => "en", "xml:lang" => "en", :xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html;charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title= page_title
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+    = yield :html_head
+  %body{:style => "margin: 0; padding: 0;"}
+    = cms_toolbar
+
+    #wrapper
+      %header
+        .container
+          .row-fluid
+            .span3
+              %a#logo{:href => "/"}
+                = image_tag("railsgirls-logo.png")
+                -#%img{:alt => "Rails Girls", :src => "images/railsgirls-logo.png"}/
+            .span9#menu
+              = render_menu
+
+      %section#content
+        .container
+          .row-fluid
+            .span12
+              %h1= page_title
+          .row-fluid
+            -#Breadcrumbs: #{render_breadcrumbs}
+            %div{:class => "#{container_has_block?(:sidebar) ? "span9" : "span12"}"}
+              .row-fluid
+                - if container_has_block?(:top_left) or container_has_block?(:top_right)
+                  .row-fluid
+                    .span6=container :top_left
+                    .span6=container :top_right
+                - if container_has_block?(:main)
+                  .row-fluid
+                    .span12= container :main
+                - if container_has_block?(:bottom_left) or container_has_block?(:bottom_right)
+                  .row-fluid
+                    .span6=container :bottom_left
+                    .span6=container :bottom_right
+            - if container_has_block?(:sidebar)
+              .span3
+                =container :sidebar
+
+      %footer
+        %p
+          2010-2012, Rails Girls.
+          %a{:href => "./contact"} Contact us
+          or follow us on
+          %a{:href => "https://twitter.com/RailsGirls_ZRH"} Twitter
+          -#and
+          -#%a{:href => "https://www.facebook.com/pages/Rails-Girls/136157603144471"} Facebook
+
+        %p.slogan Get excited and make things!
