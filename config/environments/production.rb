@@ -5,7 +5,7 @@ RailsgirlsCh::Application.configure do
   # Configure your mail server's address below
   config.action_mailer.smtp_settings = {:address => 'mail.yourmailserver.com', :domain => config.cms.site_domain}
 
-  config.cms.attachments.storage_directory = File.join(Rails.root, 'uploads')
+  config.cms.attachments.storage_directory = File.join(Rails.root, 'system', 'uploads')
 
   # Settings specified here will take precedence over those in config/application.rb
 
